@@ -52,29 +52,67 @@ $cartes = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10', 'c11', '
 
 * 7/ Exercice 
 La fonction time() de PHP retourne le timestamp Unix actuel, retournez le nombre de jours, d'heures, de minutes et de secondes qui se sont écoulées depuis une date clé de l'informatique. Connaissez-vous cette date ?
-A l'aide de la fonction date de php donnez sous forme du format suivant: 'Y-m-d' l'année le mois et le jour dans une semaine de la date d'aujourd'hui, vous devez passer en deuxième paramètre de la fonction date le nombre de secondes correspondant à cette date:
+
+Le code suivant permet de calculer la date de la semaine prochaine
 
 ```php
+$nextweek = 7 * 24 * 60 *60 ;
 date('Y-m-d', $nextweek);
 ```
 
-* 8/ Exercice (algorithme de tri) 
+* 8/ Exercice (exercice recherche) 
 Soit un jeu de carte déjà ordonné, par exemple $cartes = [11,9,5,3] et soit maintenant la carte 7.
 Ecrire une fonction PHP qui permet d'insérer la carte 7 dans le jeu de carte. Pensez que cette liste est déjà ordonnée.
 
-** 8.1/ Exercice 
+** 8.1/ Exercice (exercice recherche) 
 Comment trier une liste complète de carte dans le désordre ?
-** 8.2/ Exercice
+** 8.2/ Exercice (exercice recherche) 
 Comment gérer de manière dynamique l'ordre de la liste que l'on souhaite ranger ?
 
-* 9/ Exercice
+* 9/ Exercice (exercice recherche) 
 Soit une liste de questions dans un jeu donné, écrire une fonction qui permet de scinder cette liste en deux sous-listes de questions, par rapport à une valeur donnée.
 
-* 10/ (à rechercher)
+* 10/ (exercice recherche) 
 Ecrire maintenant une fonction qui permet de chercher rapidement un score dans une liste ordonnée de scores en procédant par dichotomie (en divisant par deux la recherche à chaque pas par rapport au score recherché).
 
-# Conception d'application
-* Exercice 11 (layout conception layout1)
+* 11.1/ Exercice
+écrire une fonction qui permet de trouver un élément dans une liste quelconque. Vous appelerez cette fonction is_in_array elle prendra deux paramètres la valeur à rechercher et le tableau de recherche.
+
+```php
+
+$list = [1, 7, 45, 2, 100, 548, 21, 18, 180];
+
+
+```
+
+* 11.2 / Exercice
+Ecrire une fonction qui trouve le nombre le plus grand dans une liste non ordonnée. Pensez à initialiser l'élément que vous chercher à zéro par exemple.
+
+
+* 12.1/ Exercice
+Créez la fonction char_rotn($n, $string) elle décallera une lettre majuscule ou minuscule d'une valeur $n donné.
+
+* 12.2/ Exercice
+Créez maintenant une fonction cesear($n, $string) qui encode une chaîne de caractères en la décallant de $n position.
+
+* 12.3/ Exercice
+Voyez le cryptogramme de Vigenère, et implémentez une fonction vigen_encode($c,$cKey) par exemple dans ce crypte on aurait:
+
+```php
+ vigen_encode('T','E') ; // afficherait 'X'
+
+ ```
+
+ * 14/ Exercice 
+ Ecrire la fonction inverse qui cette fois-ci décode, par rapport au même cryptogramme:
+```php
+ vigen_decode('X','E') ; // afficherait 'X'
+
+ ```
+
+
+# II Conception d'application
+* Exercice 1 (layout conception layout1)
 Vous allez créer deux pages: une page index.php et une page single.php dans le dossier layout1 de votre htdocs
 
 Organisation du tp
@@ -104,7 +142,7 @@ $link = null; // fermer la connexion
 ```
 
 
-* Exercice 12 (isolation de la présentation des données layout2)
+* Exercice 2 (isolation de la présentation des données layout2)
 Créez maintenant le dossier layout2 et recopier les fichiers existant du dossier layout1 dans layout2
 
 Faites un dossier views dans lequel vous allez placer les pages list.php et item.php, respectivement pour les posts et pour un post seul. Nous isolons les vues du reste du code PHP.
@@ -128,7 +166,7 @@ include './views/list.php' ;
 
 Terminez l'exercice en affichant la page d'accueil et la page dun article.
 
-* Exercice 13 (isolation de la partie model layout3)
+* Exercice 3 (isolation de la partie model layout3)
 
 Nous allons créez un fichier model.php pour isoler la partie modèle de l'application. Créez deux fonctions l'une pour afficher tous les posts et l'autre pour afficher un post en fonction de son id. Vous placerez ces fonctions dans le fichier model.php
 
@@ -142,7 +180,7 @@ get_find_post($id) { ... }
 
 ```
 
-* Exercice 14 (isolation des vues gestion du layout layout4)
+* Exercice 4 (isolation des vues gestion du layout layout4)
 Nous allons utiliser la mémoire tampon de PHP afin de créer un layout et isoler également cette partie.
 
 La fonction ob_start() de PHP permet de mettre en mémoire tampon (dans un buffer de sortie) du code qui normalement devrait partir à l'affichage. La fonction ob_get_clean() pour sa part permet de vider cette mémoire tampon et de récupérer son contenu.
@@ -173,7 +211,7 @@ Ci-dessous, la partie encapsuler dans ob_start() ne part pas à l'affichage, du 
 
 ```
 
-* Exercice 15 (isolation des actions: les controllers)
+* Exercice 5 (isolation des actions: les controllers)
 Une autre amélioration que l'on peut apporter à notre application c'est l'isolation des actions de notre application.
 Cela semble être un peu de sucre dans le code mais en fait cela permet de mieux séparer les choses, faites un fichier controller.php dans lequel on va créer deux actions:
 
@@ -191,7 +229,7 @@ function home_action()
 
 ```
 
-* Exercice 16 (FrontController: routage layout5)
+* Exercice 6 (FrontController: routage layout5)
 L'idée maintenant c'est d'avoir un unique point d'entrée pour notre application et de router la demande de notre client sur la bonne action, c'est-à-dire la bonne page !
 
 En fait rien de compliquer il suffit dans notre fichier index.php d'analyser la routes et d'exécuter la bonne action, voici de que l'on va placer dans le fichier index.php pour terminer le TP !
