@@ -74,7 +74,7 @@ Soit une liste de questions dans un jeu donné, écrire une fonction qui permet 
 Ecrire maintenant une fonction qui permet de chercher rapidement un score dans une liste ordonnée de scores en procédant par dichotomie (en divisant par deux la recherche à chaque pas par rapport au score recherché).
 
 # Conception d'application
-* Exercice 11 (layout conception)
+* Exercice 11 (layout conception layout1)
 Vous allez créer deux pages: une page index.php et une page single.php dans le dossier layout1 de votre htdocs
 
 Organisation du tp
@@ -89,92 +89,128 @@ htodcs\
 
 La page d'accueil affiche les derniers articles de votre blog, les titres des articles sont cliquables et affichent l'article en question. Utilisez la super globale $_GET['id'] dans vos urls pour la gestion de l'affichage des pages:
 
-single.php?id=1,2, ... 
+single.php?id=1,2, ... Préférez les chemins absolus pour la gestion de vos URLs.
 
-Vous partirez des articles suivants pour simplifier l'exercice pour l'instant:
+Créez une base de données et une table posts, nous allons insérer en base de données quelques données.
 
 ```php
-$posts = [1 =>'PHP7', 2 =>'JS', 3 =>'SQL', 4 =>'Angular', 5 =>'Laravel'];
+$link = new PDO("mysql:host=localhost;dbname=db_blog", 'root', '');
+$result = $link->query('SELECT id, title, content FROM posts');
+$posts = [];
+while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	$posts[] = $row;
+}
+$link = null; // fermer la connexion
 ```
 
-Nous allons améliorer la conception de notre application.
 
-* Exercice 12
+* Exercice 12 (isolation de la présentation des données layout2)
 Créez maintenant le dossier layout2 et recopier les fichiers existant du dossier layout1 dans layout2
 
-Voici maintenant votre index.php, il sera votre point d'entrée de l'application
+Faites un dossier views dans lequel vous allez placer les pages list.php et item.php, respectivement pour les posts et pour un post seul. Nous isolons les vues du reste du code PHP.
+
+Par exemple la page index.php va ressembler maintenant à:
+
 ```php
+define('URL_SITE', 'http://localhost:8000'); // variable globale pour gérer l'URL du site dans les vues
+$link = new PDO("mysql:host=localhost;dbname=db_blog", 'root', '');
 
-$location = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // permet de récupérer la partie URI de l'URL
-
-echo $location ; // affichera l'url
-
-// routage de vos URI sur une page donnée
-if($location == '/dev1/part1/layout2/')
-{
-	$posts = [1 =>'PHP7', 2 =>'JS', 3 =>'SQL', 4 =>'Angular', 5 =>'Laravel'];
-	include 'home.php';
-
+$result = $link->query('SELECT id, title, content FROM posts');
+$posts = [];
+while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	$posts[] = $row;
 }
 
+$link = null; // fermer la connexion
+include './views/list.php' ;
+
 ```
-Compte tenu de ce qui précéde arrangez-vous pour afficher vos articles en page d'accueil et sur la page des articles. Pensez à gérer vos URL de la manière suivante:
+
+Terminez l'exercice en affichant la page d'accueil et la page dun article.
+
+* Exercice 13 (isolation de la partie model layout3)
+
+Nous allons créez un fichier model.php pour isoler la partie modèle de l'application. Créez deux fonctions l'une pour afficher tous les posts et l'autre pour afficher un post en fonction de son id. Vous placerez ces fonctions dans le fichier model.php
 
 ```php
-http://localhost/dev1/part1/layout2/index.php/single/?id=<?php echo $id; ?>
-```
 
-** Exercice 12.1
+get_pdo(){ ... return $pdo; }
 
-Mettez en place maintenant le code suivant pour vous redirigez vers la page d'accueil ou la page single pour afficher un article.
+get_all_posts(){ ... }
 
-```php
-
-$location = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-echo $location; // votre url
-
-if($location == '/dev1/part1/layout2/')
-{
-
-	$posts = [1 =>'PHP7', 2 =>'JS', 3 =>'SQL', 4 =>'Angular', 5 =>'Laravel'];
-
-	include './home.php' ;
-
-}elseif($location == '/dev1/part1/layout2/index.php/single/' && isset($_GET['id'])){
-
-	echo '<pre>';
-	print_r($_GET['id']);
-	echo '</pre>';
-
-}
+get_find_post($id) { ... }
 
 ```
 
-Maintenant que vous voyez comment récupérer l'id de vos articles, affichez la page single.php avec le bon titre d'article.
+* Exercice 14 (isolation des vues gestion du layout layout4)
+Nous allons utiliser la mémoire tampon de PHP afin de créer un layout et isoler également cette partie.
 
-** Exercice 12.2
+La fonction ob_start() de PHP permet de mettre en mémoire tampon (dans un buffer de sortie) du code qui normalement devrait partir à l'affichage. La fonction ob_get_clean() pour sa part permet de vider cette mémoire tampon et de récupérer son contenu.
 
-Créez un dossier layout3 et recopier nos fichiers, pour faire la suite.
-
-Et maintenant nous allons introduire un point technique en PHP. Nous allons utiliser ce que l'on appelle une mémoire tampon pour mieux gérer nos vues. Nous allons créer un layout. Un modèle que l'on pourra utiliser pour toutes les pages du site. Et travailler avec des petites vues composites où nous allons injecter nos données.
-
-la fonction ob_start() de PHP permet d'ouvrir une mémoire tampon dans laquelle nous pouvons mettre du code PHP avec des echo mais qui ne partirons à l'affichage que lorsque nous déciderons de vider cette mémoire tampon. La fonction ob_get_clean() permet de retourner le contenu de la mémoire tampon et également de vider celle-ci. Cette dernière fonction va donc nous permettre de récupérer ce qu'il y a dans la mémoire tampon et de mettre ce contenu dans une variable PHP, puis d'afficher son contenu.
-
-Voyez plutôt un exemple, ceci permettra de mieux comprendre l'utilité d'une telle techinque:
+Ci-dessous, la partie encapsuler dans ob_start() ne part pas à l'affichage, du coup on peut l'utiliser facilement pour injecter nos données. Compte tenu de ce qui suit mettez le code dans les fichiers list.php et item.php
 
 ```php
 <?php ob_start() ; ?>
-<ul>
-	<?php foreach($posts as $id => $title): ?>
-		<li><a href="index.php/single/?id=<?php echo $id; ?>"><?php echo $title ?></a></li>
-	<?php endforeach; ?>
-</ul>
+<div class="row">
+	<div class="col-sm-12">
+		<article>
+			<h1><?php echo $post['title'] ?></h1>
+			<p><?php echo $post['content'] ?></p>
+		</article>
+	</div>
+</div>
 <?php $content = ob_get_clean() ; ?>
-
 <?php include 'master.php' ?>
+
+// dans le fichier master.php il suffira de faire un echo $content
+
+<html>
+	<head></head>
+	<body>
+		<?php echo $content;  ?>
+	</body>
+</html>
+
 ```
 
-Ainsi dans le master.php (code complet d'une page HTML) vous n'aurez qu'à faire un echo de la variable $content pour afficher ce contenu.
+* Exercice 15 (isolation des actions: les controllers)
+Une autre amélioration que l'on peut apporter à notre application c'est l'isolation des actions de notre application.
+Cela semble être un peu de sucre dans le code mais en fait cela permet de mieux séparer les choses, faites un fichier controller.php dans lequel on va créer deux actions:
 
-Mettez en place dans le layout3 cette technique pour l'affichage de nos pages.
+** une pour l'affichage de posts en page d'accueil home_action() et une autre show_action($id)
+
+
+```php
+
+function home_action()
+{
+	$posts =  get_all_posts();
+
+	include './views/list.php' ;
+}
+
+```
+
+* Exercice 16 (FrontController: routage layout5)
+L'idée maintenant c'est d'avoir un unique point d'entrée pour notre application et de router la demande de notre client sur la bonne action, c'est-à-dire la bonne page !
+
+En fait rien de compliquer il suffit dans notre fichier index.php d'analyser la routes et d'exécuter la bonne action, voici de que l'on va placer dans le fichier index.php pour terminer le TP !
+
+```php
+define('URL_SITE', 'http://localhost:8000'); // variable globale
+
+require 'model.php';
+require 'controller.php';
+
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+if ($location === $uri) {
+	home_action();
+} elseif ($location.'index.php/single' === $uri && isset($_GET['id'])) {
+	show_action($_GET['id']);
+} else {
+	header('HTTP/1.1 404 Not Found');
+	echo '<html><body><h1>Page Not Found</h1></body></html>';
+}
+
+```
