@@ -13,7 +13,6 @@ while($life< $force)
 	echo ++$life . "\n"; // retour à la ligne dans le fichier mettre des doubles côtes
 }
 
-
 // exercice 2 
 // 15 / 2 = 7 reste 1 15 = 7*2 + 1  <- modulo 2 
 if(0) echo "zéro"; else echo "faux"; // 0 <=> false
@@ -24,7 +23,6 @@ while($force)
 	if( $force % 2 == 1 ) echo $force ;  // if($force%2) echo $force;
 	$force--;
 }
-
 
 // Exercice 3
 $force = 0 ;
@@ -69,8 +67,6 @@ echo '<pre>';
 print_r(inverse_str('Engage le jeu que je le gagne'));
 echo '</pre>';
 
-
-
 // exercice 5
 function gen_num_alea($length,$interval){
 	$result = 0;
@@ -85,10 +81,7 @@ function gen_num_alea($length,$interval){
 }
 gen_num_alea(5,1);
 
-
-
 // exercice 6
-
 $cartes = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10', 'c11', 'c12', 'c13', 'c14', 'c15','c16', 'c17', 'c18', 'c19', 'c20'];
 
 function tirage_alea ($array, $num) {
@@ -120,15 +113,13 @@ echo '</pre>';
 
 // Exercice 7 todo
 
-// Exercice 8
+// Exercice 8 (***)
 
-// Exercice
-
-// insertion liste croissante (ordonnée)
+// insertion liste croissante (ordonnée) uniquement
 function insert($n, array $q)
 {
 	$len = count($q);
-    // vous pouvez mettre le test pour l'insertion directement dans le for 
+    // vous pouvez mettre le test pour l'insertion directement dans le for mais sa fixe l'ordre dans lequel vous faites l'insertion ici l'ordre doit être croissant
 	for($i=$len; $i>0 && $n < $q[$i-1] ; $i--)
 	{
         $q[$i] = $q[$i-1];// decallage vers la droite
@@ -152,7 +143,7 @@ echo '<pre>';
 print_r(insert(3, [1,2,4,7,9]));
 echo '</pre>';
 
-
+// tri par insertion (***) ordonne donc par ordre croissant la liste de nombre
 function insert_sort(array $q) {
 
 	$len = count($q);
@@ -251,14 +242,14 @@ echo '<pre>';
 print_r(nb_question_lg($listQ, 11));
 echo '</pre>';
 
-// Exercice 12 Cryptogramme Cesear
+// Exercice 12 Cryptogramme Cesear (***)
 function char_rot($n,$c)
 {
 	$code = ord($c);
 
 	if($code > 96 && $code < 123)
 	{
-	$num = ( ($code - 97  + $n) % 26 ) + 97 ; // translation à 0 puis redécallage à 97 pour se positionner sur les majuscules
+		$num = ( ($code - 97  + $n) % 26 ) + 97 ; // translation à 0 puis redécallage à 97 pour se positionner sur les majuscules
 	}
 
 	if($code > 64 && $code < 91){
@@ -295,34 +286,35 @@ print_r(cesear(2, strtolower('ABCDEFGHIJKLMNOPQRSTUVWXYZ')));
 echo '</pre>';
 
 
-// Exercice 12 et 14
+// Exercice 12 et 14 (***)
 
 function char_vigen_encode($a, $b)
 {
-return char_rot(ord($b) - 65, $a);
+	return char_rot(ord($b) - 65, $a);
 }
 
 function char_vigen_decode($a, $b)
 {
 
-$num = 26 - (ord($b) - 65) ; // reculer
+	$num = 26 - (ord($b) - 65) ; // reculer
 
-return char_rot($num, $a);
+	return char_rot($num, $a);
 }
 
 echo '<pre>';
-print_r(char_vigen_encode('T', 'E'));
+print_r(char_vigen_encode('T', 'E')); // X voir la table de vigenere 
 echo '</pre>';
 
 echo '<pre>';
-print_r(char_vigen_decode('X', 'E'));
+print_r(char_vigen_decode('X', 'E')); // T voir table vigenere
 echo '</pre>';
 
 // Vigenere encode et decode
+// Dans l'absolu on peut faire qu'une fonction pour traiter l'encodage et décodage mais c'est trop technique pour l'instant alors comprenez déjà l'algo de ces deux fonctions et se sera très bien.
 function vigen_decode(string $str, string $key)
 {
 	$len = strlen($str);
-	$lenKey = strlen($key);
+	$lenKey = strlen($key); // $lenKey et $len peuvent être différent en longueur
 
 	$code = '';
 	$j = 0 ;
@@ -370,5 +362,9 @@ print_r(vigen_decode("ZINCS PYVJV", "SECRETKEY"));
 echo '</pre>';
 
 echo '<pre>';
-print_r(vigen_decode("WWRVVHXW OMI EVX XHIPUMEV RX DSKTI RRW TE XN FSVV", "SECRETKEY"));
+print_r(vigen_encode("LES DEV A FORCE DE FAIRE DE L ALGO IL VONT DEVENIR SUPERS FORTS", "SECRETKEY"));
+echo '</pre>';
+
+echo '<pre>';
+print_r(vigen_decode("DIU UIO K JMJGG UI YKMPW HG C EEQS GD ZQEX WOZCFMT JYIOVQ XSTKW", "SECRETKEY"));
 echo '</pre>';
