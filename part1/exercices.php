@@ -46,7 +46,6 @@ echo '</pre>';
 function inverse_str($string)
 {
 	$len = strlen($string); // longueur de la chaine
-
 	$inv = '' ;
 	/*
 	while($len != 0 )
@@ -85,7 +84,6 @@ gen_num_alea(5,1);
 $cartes = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10', 'c11', 'c12', 'c13', 'c14', 'c15','c16', 'c17', 'c18', 'c19', 'c20'];
 
 function tirage_alea ($array, $num) {
-	
 	$result = [];
 	$index_array = array_rand($array, $num);
 	/*
@@ -145,9 +143,7 @@ echo '</pre>';
 
 // tri par insertion (***) ordonne donc par ordre croissant la liste de nombre
 function insert_sort(array $q) {
-
 	$len = count($q);
-
 	$list = [];
 	for($i=0; $i < $len; $i++)
 	{
@@ -197,8 +193,7 @@ echo '</pre>';
 // Exercice 11.3 
 function mediane(array $list){
 
-	sort($list);
-
+	sort($list); // ordonne la liste, croissante, par référence dans le scope de la fonction
 	$len = count($list);
 
 	if( $len%2 == 0) {
@@ -228,7 +223,6 @@ echo '</pre>';
 // Exercice 11.4 
 function nb_question_lg(array $questions, $max)
 {
-
 	$cpt = 0 ;
 	foreach($questions as $q )
 	{
@@ -246,7 +240,9 @@ echo '</pre>';
 function char_rot($n,$c)
 {
 	$code = ord($c);
-
+	// on ne traite pas cette plage de code dans la table ASCII
+	if($code < 64 || $code > 91) return;
+	
 	if($code > 96 && $code < 123)
 	{
 		$num = ( ($code - 97  + $n) % 26 ) + 97 ; // translation à 0 puis redécallage à 97 pour se positionner sur les majuscules
@@ -265,16 +261,14 @@ print_r(char_rot(1, 'Z'));
 echo '</pre>';
 
 function cesear($num, $message){
+	$len = strlen($message);
+	$code = '';
 
-$len = strlen($message);
-$code = '';
+	for ($i=0; $i <$len ; $i++) { 
+		$code .=  char_rot($num, $message[$i]);
+	}
 
-for ($i=0; $i <$len ; $i++) { 
-	$code .=  char_rot($num, $message[$i]);
-}
-
-return $code;
-
+	return $code;
 }
 
 echo '<pre>';
