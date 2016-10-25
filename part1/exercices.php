@@ -118,8 +118,63 @@ echo '<pre>';
 print_r(tirage_alea($cartes, 2));
 echo '</pre>';
 
-// Exercice 11
+// Exercice 7 todo
 
+// Exercice 8
+
+// Exercice
+
+// insertion liste croissante (ordonnée)
+function insert($n, array $q)
+{
+	$len = count($q);
+    // vous pouvez mettre le test pour l'insertion directement dans le for 
+	for($i=$len; $i>0 && $n < $q[$i-1] ; $i--)
+	{
+        $q[$i] = $q[$i-1];// decallage vers la droite
+    }
+
+    $q[$i] = $n;
+
+    return $q;
+
+}
+
+echo '<pre>';
+print_r(insert(10, [1,2,4,7,9]));
+echo '</pre>';
+
+echo '<pre>';
+print_r(insert(0, [1,2,4,7,9]));
+echo '</pre>';
+
+echo '<pre>';
+print_r(insert(3, [1,2,4,7,9]));
+echo '</pre>';
+
+
+function insert_sort(array $q) {
+
+	$len = count($q);
+
+	$list = [];
+	for($i=0; $i < $len; $i++)
+	{
+		$list = insert($q[$i], $list); 
+	}
+
+	return $list;
+}
+
+echo '<pre>';
+print_r(insert_sort([1,54,2,42,10,99,20,17,3,0,100]));
+echo '</pre>';
+
+echo '<pre>';
+print_r(insert_sort([1,54,2]));
+echo '</pre>';
+
+// Exercice 11.1 
 function is_in_array($elem, array $list)
 {
 	foreach($list as $e) 
@@ -130,13 +185,13 @@ function is_in_array($elem, array $list)
 	return false;
 }
 
-
-function find_max_elem(array $list, Closure $comp)
+// Exercice 11.2
+function find_max_elem(array $list)
 {
 	$max = 0 ;
 	foreach($list as $e) 
 	{
-		if($comp($e, $max)) $max = $e;
+		if($e > $max) $max = $e;
 	}
 
 	return  $max;
@@ -145,9 +200,10 @@ function find_max_elem(array $list, Closure $comp)
 $list = [1,5,89,2,0,10,6];
 
 echo '<pre>';
-print_r(find_max_elem($list, function($a, $b) {return ($a > $b); }));
+print_r(find_max_elem($list));
 echo '</pre>';
 
+// Exercice 11.3 
 function mediane(array $list){
 
 	sort($list);
@@ -178,8 +234,8 @@ echo '<pre>';
 print_r(mediane([45,8,9,10,3,5,6]));
 echo '</pre>';
 
-
-function nb_question_lg(array $questions, int $max)
+// Exercice 11.4 
+function nb_question_lg(array $questions, $max)
 {
 
 	$cpt = 0 ;
@@ -195,20 +251,14 @@ echo '<pre>';
 print_r(nb_question_lg($listQ, 11));
 echo '</pre>';
 
-echo '<pre>';
-print_r(find_max_elem($listQ, function($a, $b) { return (strlen($a) > strlen($b)) ;}));
-echo '</pre>';
-
-// Exercice cesear PHP 12
-
-function char_rot(int $n, string $c)
+// Exercice 12 Cryptogramme Cesear
+function char_rot($n,$c)
 {
 	$code = ord($c);
 
 	if($code > 96 && $code < 123)
 	{
-		$num = ( ($code - 97  + $n) % 26 ) + 97 ; // translation à 0 puis redécallage à 97 pour se positionner sur les majuscules
-
+	$num = ( ($code - 97  + $n) % 26 ) + 97 ; // translation à 0 puis redécallage à 97 pour se positionner sur les majuscules
 	}
 
 	if($code > 64 && $code < 91){
@@ -223,16 +273,16 @@ echo '<pre>';
 print_r(char_rot(1, 'Z'));
 echo '</pre>';
 
-function cesear(int $num, string $message) : string{
+function cesear($num, $message){
 
-	$len = strlen($message);
-	$code = '';
+$len = strlen($message);
+$code = '';
 
-	for ($i=0; $i <$len ; $i++) { 
-		$code .=  char_rot($num, $message[$i]);
-	}
+for ($i=0; $i <$len ; $i++) { 
+	$code .=  char_rot($num, $message[$i]);
+}
 
-	return $code;
+return $code;
 
 }
 
@@ -245,19 +295,19 @@ print_r(cesear(2, strtolower('ABCDEFGHIJKLMNOPQRSTUVWXYZ')));
 echo '</pre>';
 
 
-// Vingere uniquement sur les lettres majuscules
+// Exercice 12 et 14
 
 function char_vigen_encode($a, $b)
 {
-	return char_rot(ord($b) - 65, $a);
+return char_rot(ord($b) - 65, $a);
 }
 
 function char_vigen_decode($a, $b)
 {
 
-	$num = 26 - (ord($b) - 65) ; // reculer
+$num = 26 - (ord($b) - 65) ; // reculer
 
-	return char_rot($num, $a);
+return char_rot($num, $a);
 }
 
 echo '<pre>';
@@ -268,6 +318,7 @@ echo '<pre>';
 print_r(char_vigen_decode('X', 'E'));
 echo '</pre>';
 
+// Vigenere encode et decode
 function vigen_decode(string $str, string $key)
 {
 	$len = strlen($str);
@@ -277,13 +328,13 @@ function vigen_decode(string $str, string $key)
 	$j = 0 ;
 	for ($i=0; $i < $len ; $i++) { 
 
-		if($str[$i] == ' ') {
-			$code .= ' '; continue;
-		}
+	if($str[$i] == ' ') {
+		$code .= ' '; continue;
+	}
 
-		$code .= char_vigen_decode($str[$i], $key[$j % $lenKey]);
+	$code .= char_vigen_decode($str[$i], $key[$j % $lenKey]);
 
-		$j++;
+	$j++;
 	}
 
 	return $code;
@@ -292,7 +343,7 @@ function vigen_decode(string $str, string $key)
 function vigen_encode(string $str, string $key)
 {
 	$len = strlen($str);
-	$lenKey = strlen($key);
+	$lenKey = strlen($key); // $lenKey et $len peuvent être différent en longueur
 
 	$code = '';
 	$j = 0 ;
@@ -321,5 +372,3 @@ echo '</pre>';
 echo '<pre>';
 print_r(vigen_decode("WWRVVHXW OMI EVX XHIPUMEV RX DSKTI RRW TE XN FSVV", "SECRETKEY"));
 echo '</pre>';
-
-
