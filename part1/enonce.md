@@ -88,6 +88,14 @@ $list = [1, 7, 45, 2, 100, 548, 21, 18, 180];
 * 11.2 / Exercice
 Ecrire une fonction qui trouve le nombre le plus grand dans une liste non ordonnée. Pensez à initialiser l'élément que vous chercher à zéro par exemple.
 
+* 11.3 / Exercice (médiane d'une série de score)
+Ecrire une fonction qui permet de trouver la médiane d'une liste de socres, pensez à ordonner cette liste par exemple avec sort de PHP, par exemple avec la fonction sort de PHP.
+Rappelons que la médiane est définie comme suit: si la liste comporte un nombre paire de valeurs alors, si $len est la longueur de la série, on a $p = $len/2 et la médiane est le centre des valeurs $p et $p+1 (indices).
+Sinon si $len est impaire la médiane de la série de scores est donnée par l'indice ($len + 1)/ 2
+
+* 11.4/ Exercice
+Soit un tableau de questions, écrire une fonction qui retourne le nombre de questions supérieur ou égale à une longueur de chaîne de caractères donnée.
+
 
 * 12.1/ Exercice
 Créez la fonction char_rotn($n, $string) elle décallera une lettre majuscule ou minuscule d'une valeur $n donné.
