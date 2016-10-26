@@ -117,6 +117,8 @@ Voyez le cryptogramme de Vigenère, et implémentez une fonction vigen_encode($c
  vigen_decode('X','E') ; // afficherait 'X'
 
  ```
+* 15/ Exercice
+Soit un cercle de rayon r écrire une fonction is_in_circle($coord, $pro) qui détermine si un projectile $proj de coordonnées (x,y) impacte le cercle.
 
 
 # II Conception d'application
@@ -148,7 +150,6 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 }
 $link = null; // fermer la connexion
 ```
-
 
 * Exercice 2 (isolation de la présentation des données layout2)
 Créez maintenant le dossier layout2 et recopier les fichiers existant du dossier layout1 dans layout2
