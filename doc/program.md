@@ -1,11 +1,23 @@
-| Semaine 1      |     Semaine 2   			|   Semaine3 									|
-| -------------  |: -------------: 			| ---------: 									|
-| Algo           | Lundi: MVC               | Lundi: recherche du plus court chemin (algo)  |
-| Initiation MVC | Mercredi: PDO,SQL		| Lundi: Objet PHP notions fondamentales		|
-| Initiation MVC | Jeudi matin: PDO,SQL		| Mardi: CRUD avec Lumen						|
-| 				 | Jeudi après-midi: Lumen	| Mercredi: CRUD avec Lumen						|
-| 				 | vendredi matin: Lumen	| Jeudi: matin CRUD avec Lumen 					|
-| 				 | + Projet Lumen noté		| Jeudi: après midi Git (déploy, branche)		|
+# Semaine 1
+Algo
+Initiation MVC
+Initiation MVC
+
+# Semaine 2
+Lundi: MVC   
+Mercredi: PDO,SQL
+Jeudi matin: PDO,SQL
+Jeudi après-midi: Lumen
+vendredi matin: Lumen
++ Projet Lumen noté		
+
+# Semaine 3
+Lundi: recherche du plus court chemin (algo) 
+Lundi: Objet PHP notions fondamentales
+Mardi: CRUD avec Lumen
+Mercredi: CRUD avec Lumen	
+Jeudi: matin CRUD avec Lumen 
+Jeudi: après midi Git (déploy, branche)	
 
 # Lumen
 - micro framework Laravel
