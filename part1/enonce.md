@@ -364,9 +364,9 @@ Terminez l'exercice en appelant ces variables dans le fichier model.php pour ren
 * Exercice 4 (Projet) DB data
 Nous allons installer une base de données avec des tables et des contenus, récupérez le zip du projet () et installez la base de données db_blog, elle comporte les tables posts, categories, comments et authors. Cette base de données est relationnelle, elle a donc des clés primaires et secondaires.
 
-* Exercice 5 (Projet) Menu principal
+* Exercice 5.1 (Projet) Structure HTML site
 Remarque le site est responsive sur deux colonnes, utiliser un framework HTML pour ce point. Vous mettrez en place une colonne à gauche centrale pour les contenus et une colonne latérale à droite (listes des auteurs du site).
-** Concevez le menu principal. 
+* Exercice 5.2 (menu principal navigation) 
 Nous allons travailler dans le master.php et faire un foreach pour afficher les catégories du site. Celle-ci seront cliquables et afficherons les articles se trouvant associés à cette catégorie (action category_action($id), à faire dans un second temps). Vous ajouterez un lien pour la page d'Accueil et un lien contactez-nous dans ce menu, voir le wireframe plus bas.
 Remarques: la seule possiblité que nous ayons pour l'instant pour réaliser cela simplement avec notre petite application, c'est de créer une fonction get_all_categories() dans nos modèles et d'appeler celle-ci dans notre contrôleur home_action() pour injecter les données de la table categories dans nos vues.
 
