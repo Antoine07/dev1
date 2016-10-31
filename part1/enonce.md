@@ -365,11 +365,10 @@ Terminez l'exercice en appelant ces variables dans le fichier model.php pour ren
 Nous allons installer une base de données avec des tables et des contenus, récupérez le zip du projet () et installez la base de données db_blog, elle comporte les tables posts, categories, comments et authors. Cette base de données est relationnelle, elle a donc des clés primaires et secondaires.
 
 * Exercice 5 (Projet) Menu principal
-Remarque le site est responsive sur deux colonnes, utiliser un framework. Une colonne à gauche centrale pour les contenus et une colonne latérale à droite (listes des auteurs du site).
-Concevez le menu principal. 
-Nous allons travailler dans le master.php et faire un foreach pour afficher les catégories du site. Celle-ci seront cliquables et afficherons les articles se trouvant associés à cette catégorie (action category_action($id)). Vous ajouterez un lien Accueil et un lien contactez-nous dans ce menu.
-Pour l'instant ne créez pas l'action permettant d'afficher les articles d'une catégorie.
-La seule possiblité que nous ayons pour l'instant pour réaliser cela simplement avec notre petite application c'est de créer une fonction get_all_categories() dans nos modèles et d'appeler celle-ci dans notre contrôleur home_action() pour injecter nos données dans nos vues.
+Remarque le site est responsive sur deux colonnes, utiliser un framework HTML pour ce point. Vous mettrez en place une colonne à gauche centrale pour les contenus et une colonne latérale à droite (listes des auteurs du site).
+** Concevez le menu principal. 
+Nous allons travailler dans le master.php et faire un foreach pour afficher les catégories du site. Celle-ci seront cliquables et afficherons les articles se trouvant associés à cette catégorie (action category_action($id), à faire dans un second temps). Vous ajouterez un lien pour la page d'Accueil et un lien contactez-nous dans ce menu, voir le wireframe plus bas.
+Remarques: la seule possiblité que nous ayons pour l'instant pour réaliser cela simplement avec notre petite application, c'est de créer une fonction get_all_categories() dans nos modèles et d'appeler celle-ci dans notre contrôleur home_action() pour injecter les données de la table categories dans nos vues.
 
 ```php
 function home_action()
