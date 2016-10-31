@@ -1,7 +1,7 @@
 # Challenges
 
 - remarques
-Attention dans un fichier si vous comptez le nombre de caractères par ligne vous avez un caractère spéciale \n qui correspond au retour à la ligne, celui-ci ne se trouve pas en fin de ligne. Donc dans vos algorithmes il faudra le prendre en compte.
+Attention dans un fichier si vous comptez le nombre de caractères par ligne vous avez un caractère spéciale \n qui correspond au retour à la ligne, celui-ci ne se trouve pas en fin de fichier sur la dernière ligne... Donc dans vos algorithmes il faudra le prendre en compte.
 
 ## Génération d'un damier
 Contrainte: vous devez lire un fichier data.txt, ligne par ligne, celui-ci déterminera les dimensions du damier et les position des cases. Par exemple vous pouvez faire *#*# pour votre pattern dans le fichier data.txt.
