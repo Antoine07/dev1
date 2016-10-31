@@ -1,6 +1,8 @@
-# Algorithmie
+# Semaine 1
 
-## Structure de vos exercices
+## Algorithmie
+
+### Structure de vos exercices
 
 Vous devez créer la structure suivante sur votre serveur xampp, vérifiez que vous avez bien la dernière version de PHP
 
@@ -121,7 +123,7 @@ Voyez le cryptogramme de Vigenère, et implémentez une fonction vigen_encode($c
 Soit un cercle de rayon r écrire une fonction is_in_circle($coord, $pro) qui détermine si un projectile $proj de coordonnées (x,y) impacte le cercle.
 
 
-# II Conception d'application
+## II Conception d'application
 * Exercice 1 (layout conception layout1)
 Vous allez créer deux pages: une page index.php et une page single.php dans le dossier layout1 de votre htdocs
 
@@ -261,6 +263,7 @@ if ($location === $uri) {
 }
 
 ```
+# Semaine 2
 
 * Exercice 1 (Projet)
 Le dernier layout...Nous allons préparer la réalisation d'un mini blog que vous devrez terminer. Pour l'organisation nous allons faire encore quelques modifications.
