@@ -261,3 +261,226 @@ if ($location === $uri) {
 }
 
 ```
+
+* Exercice 1 (Projet)
+Le dernier layout...Nous allons préparer la réalisation d'un mini blog que vous devrez terminer. Pour l'organisation nous allons faire encore quelques modifications.
+Vous allez appeler votre mini framework myApp, mettez en place votre premier micro framework et testez le comme d'habitude en laçant votre serveur PHP dans le dossier web
+```
+myApp\
+    views
+    web/
+        index.php // point d'entrée de l'application, FrontController
+    .env // petit fichier qui nous permettra de fixer les paramètres de l'application
+    .gitignore // ne versionner pas /vendor et .env
+    app.php  // bootstrap de l'application 
+    composer.json // nous allons utiliser quelques dépendances PHP, à préciser dans ce fichier 
+    controller.php  
+    model.php
+    
+```
+
+* Exercice 2 (Projet)
+Installation de Composer. Composer est un outils permettant de gérer les dépendances (compoment) de vos applications PHP, comme avec npm en JS.
+Composer fonctionne avec Packgist le dépôt officiel des composants PHP. 
+Le code source des dépôts sont visibles sur Github ou Bitbucket en général.
+
+Sous Windows allez sur le site Composer et télécharger l'exécutable, il n'y a rien à faire, il suffit de lancer l'installer.
+
+Sous Mac, vous devez télécharger composer.phar et l'installer dans votre /usr/bin/local, renommez se programme en composer, plus pratique à utiliser.
+
+Testez votre outils:
+```bash
+composer -v
+```
+Voici ce que nous allons faire: 
+
+```bash
+
+// Dans votre app (à la racine) lancez l'initialisation de notre composer.json fichier de config et répondez aux questions, ne pas installer des dépendances pour l'instant.
+composer init
+
+// Nous allons installer le gestionnaire de variables d'environnement pour notre app suivant:
+composer search vlucas/phpdotenv
+
+//Une installation effective de ce composant se fera avec la commande suivante
+composer require vlucas/phpdotenv
+
+```
+
+* Exercice 3 (Projet)
+Mettez en place un autoloader pour vos différents fichiers à l'aide de composer. Ce dernier possède un autoload de fichier.
+Ajoutez dans le fichier composer.json le code suivant, puis dans le bootstrap incluez l'autoloader de Composer. Cela permettra d'inclure automatiquement les fichiers dans votre projet.
+
+```
+{
+...
+"autoload": {
+		"files": [ "model.php", "controller.php"]
+	}
+}
+// puis dans votre bootstrap.php amorçage de l'app 
+require_once __DIR__.'/vendor/autoload.php';
+
+```
+Incluez alors le bootstrap.php dans votre FrontController (index.php) dans le dossier web
+
+```
+require_once __DIR__.'/../app.php';
+
+```
+Terminez par une commande pour demander à Composer de calculer l'ensemble des chemins de nos fichiers.
+
+```
+composer dumpautoload
+```
+Et enfin, testez votre app...
+
+
+* Exercice 3 (Projet)
+Installer le composant vlucas/phpdotenv, il va nous permettre de gérer les variables d'environnement de notre application. Créez maintenant le fichier .env à la racine de votre application et écrivez toutes les variables nécessaires utiles pour votre application.
+
+```
+DB_NAME=db_blog
+DB_HOST=localhost
+...
+
+// pour utiliser ces variables dans votre il faudra faire deux choses les chargés de manière globale et les appelées dans le code source.
+
+getEnv('DB_NAME'); // affichera le nom de votre base de données
+
+```
+Dans le fichier app.php charger vos variables d'environement pour l'app comme suit, fichier app.php (bootstrap de l'application)
+
+```
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+```
+
+Terminez l'exercice en appelant ces variables dans le fichier model.php pour rendre votre fonction getPDO() plus portable, par exemple. Utilisez la fonction getEnv('DB_NAME'), getEnv('DB_USER') ...
+
+* Exercice 4 (Projet) DB data
+Nous allons installer une base de données avec des tables et des contenus, récupérez le zip du projet () et installez la base de données db_blog, elle comporte les tables posts, categories, comments et authors. Cette base de données est relationnelle, elle a donc des clés primaires et secondaires.
+
+* Exercice 5 (Projet) Menu principal
+Remarque le site est responsive sur deux colonnes, utiliser un framework. Une colonne à gauche centrale pour les contenus et une colonne latérale à droite (listes des auteurs du site).
+Concevez le menu principal. 
+Nous allons travailler dans le master.php et faire un foreach pour afficher les catégories du site. Celle-ci seront cliquables et afficherons les articles se trouvant associés à cette catégorie (action category_action($id)). Vous ajouterez un lien Accueil et un lien contactez-nous dans ce menu.
+Pour l'instant ne créez pas l'action permettant d'afficher les articles d'une catégorie.
+La seule possiblité que nous ayons pour l'instant pour réaliser cela simplement avec notre petite application c'est de créer une fonction get_all_categories() dans nos modèles et d'appeler celle-ci dans notre contrôleur home_action() pour injecter nos données dans nos vues.
+
+```php
+function home_action()
+{
+	$posts =  get_all_posts();
+	$categories = get_all_categories();
+
+	include 'home.php'; // renommez votre vue list.php en home.php plus sémantique...
+}
+```
+Terminez l'exercice et afficher les catégories du site dans le menu principal. Voyez un exemple de ce que l'on vous demande en ligne, n'affichez pas les informations métas de vos articles pour l'instant (metas: nom de l'auteur et nombre de commentaires), arrangez-vous cependant pour afficher un extrait en page d'accueil avec un lien lire la suite:
+
+wireframe [http://app.hicode.ovh] page d'accueil du blog
+
+* Exercice 6 (Projet)
+Sur la page d'accueil, pour finaliser l'affichage des articles, affichez maintenant les métas informations de vos articles.
+Vous ferez une jointure pour récupérer le nom de l'auteur de l'article pour l'afficher directement dans la boucle principale affichant l'ensemble des articles.
+Pour les commentaires, créez une fonction get_comments_by_post($post['id']), permettant de récupérer les commentaires de votre blog associés à votre article.
+Affichez également la liste des auteurs dans la sidebar.
+
+* Exercice 7 (Projet)
+Affichez les articles d'une catégorie, créez l'action category_action($id) et la vue category.php
+Voyez la page suivante pour modèle: [http://app.hicode.ovh/index.php/category?id=1]
+Finalisez et gérer maintenant l'affichage d'un article avec le titre le contenu de son article le nom de l'auteur et ses commentaires.
+
+* Exercice 8.1 (Projet) ***
+Page contact. Sans envoi d'email pour l'instant, nous le ferons par la suite. Nous allons voir comment gérer une page contact avec un formulaire. créez l'action about_action() elle affichera un formulaire avec un champ pour l'adresse email et un champ pour laisser un message, ces deux champs sont obligatoires.
+L'action dans le formulaire aura la même route et vous allez analyser dans la même action le demande du client soit c'est du GET et dans ce cas vous affichez le formulaire, soit c'est du POST et vous traiterez les données du form et en fonction de celles-ci vous allez rediriger l'internaute sur le form lui-même si pb avec les données, soit en page d'accueil.
+Voici ci-dessous le code PHP pour gérer les données POST et GET:
+
+```php
+
+function about_action()
+{
+	if($_SERVER['REQUEST_METHOD'] == 'POST')
+	{
+		echo '<pre>';
+		print_r($_POST);
+		echo '</pre>';
+	}	
+
+	include 'about.php';
+}
+
+```
+
+* Exercice 8.1 (Projet) ***
+vérifiez les données, le formulaire sera à représenter si au moins un des deux champs est vide ou si l'adresse email n'est pas valide (vérification côté serveur). Faites une redirection si une erreur au moins se produit lors du traitement du formulaire par votre action about_action
+
+```
+filter_var($_POST['email'], FILTER_VALIDATE_EMAIL); // fonction PHP permettant de vérifier la syntax d'un email
+// la fonction suivante vérifie si une variable vaut '', null ou n'exsite pas 
+empty($_POST['message']);
+
+// ci-dessous une redirection en PHP, attention à bien mettre un exit() à la suite d'un header location, car sinon les scripts sous une redirection continurait à s'exécuter:
+header('Location /index.php/about');
+exit;
+
+```
+
+* Exercice 8.2 (Projet)
+Gestion des messages d'erreurs. Nous allons utiliser les variables de session de PHP pour gérer les messages de succès ou d'échecs.
+Affichez un message d'erreur sur la page de contact, si une erreur de saisie c'est produite. Vous pouvez par exemple vérifier que la variable $_SESSION['flash_message'] existe dans votre master.php
+
+```php
+<?php if(isset($_SESSION['flash_message'])): ?>
+	...
+<?php endif; ?>
+```
+
+* Exercice 8.3 (Projet)
+Affichez les messages d'erreurs spécifiques aux champs erronés, lors de la soumission de votre formulaire contact. Vous pouvez par exemple créer une variable $_SESSION['old']['email'] et une variable $_SESSION['errors']['email'] pour respectivement remettre les données valides de votre formulaire dans le formulaire et afficher un message d'erreur sous un champ en particulier.
+
+
+* Exercice 8.4 (Projet)
+Finalisez maintenant les massages de succès en page d'accueil.
+
+* Exercice 8.5 (Projet)
+Nous allons terminez le formulaire en installant un composant pour la gestion de l'envoi d'email: Switfmailer. Faites cette installation à l'aide de composer:
+
+```
+composer search switfmailer 
+composer require swiftmailer/swiftmailer
+
+```
+Créez les variables d'environement suivante pour plus de portabilité, dans votre fichier .env, pensez à relancer votre serveur de test pour que PHP les prennent en compte.
+
+```
+EMAIL_USERNAME=tony@tony.com
+EMAIL_PASSWORD=
+SMTP_PORT=465
+SMTP_SERVER=ssl0.ovh.net
+EMAIL_ENCRYPTON=ssl
+```
+Et enfin dans l'action about_action() utilisez Swiftmailer pour envoyer le message:
+
+```php
+// définition des paramètres de l'envoi du message
+$transport = Swift_SmtpTransport::newInstance(getEnv('SMTP_SERVER'), getEnv('SMTP_PORT'), getEnv('EMAIL_ENCRYPTON'))
+		->setUsername(getEnv('EMAIL_USERNAME'))
+		->setPassword(getEnv('EMAIL_PASSWORD'));
+
+		$mailer = Swift_Mailer::newInstance($transport);
+
+		$message = Swift_Message::newInstance('Wonderful Subject')
+		->setFrom(array($_POST['email'] => 'John Doe'))
+		->setTo(array('tony@hicode.ovh','antoine.lucsko@wanadoo.fr', 'antoine.lucsko@gmail.com'))
+		->setBody($_POST['message']);
+		$mailer->send($message)
+```
+Finalisez l'envoi du message.
+
+Vous avez terminer l'application.
+
+
+
+
