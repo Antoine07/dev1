@@ -1,8 +1,6 @@
 ## Création des tables
 
-récupérer le fichier source [sources](https://app.hicode.ovh/gamers.zip); Tout est dans ce fichier alors installez à partir d'une console pour avoir la base de données les tables et les données d'exemple pour commencer.
-
-adaptez à votre chemin
+Récupérez le fichier source [sources](https://app.hicode.ovh/gamers.zip); utilisez la console pour mettre en place les exercices.
 
 ```sql
 
