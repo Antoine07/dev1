@@ -14,7 +14,7 @@ fclose($handle); // ferme le fichier
 Par ailleurs, organiser vos scripts de manière à pouvoir séparer la partie algorithmique de la partie vue. On ne vous demande pas d'aller jusqu'à construire une application MVC, mais de séparer les scripts du HTML le plus possible. Par exemple un fichier utils.php ou library.php serait bien pour la partie PHP.
 
 ## Génération d'un damier
-Contrainte: vous devez lire un fichier data.txt, ligne par ligne, celui-ci déterminera les dimensions du damier et les position des cases. Par exemple vous pouvez faire *#*# pour votre pattern dans le fichier data.txt pour materialiser une alternance de couleur pour les carrés.
+Contrainte: vous devez lire un fichier data.txt, ligne par ligne, celui-ci déterminera les dimensions du damier et les position des cases. 
 
 Utilisez un paramètre dans l'URL pour fixer la taille de votre pavage.
 http://localhost/dev1/search/damier.php?nb=10
