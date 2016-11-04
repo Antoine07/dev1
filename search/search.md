@@ -1,7 +1,7 @@
 # Challenges
 
 - remarques
-L'objectif est de vous faire découvrir la notion de fichier et donc de flux. Ici les fichiers utilisent des patterns que l'on doit par la suite utiliser pour dessiner des formes.
+L'objectif est de vous faire découvrir la notion de fichier et donc de flux. Et également de vous faire faire de l'algorithmie. Ici les fichiers utilisent des patterns que l'on doit par la suite utiliser pour dessiner des formes.
 Attention, dans un fichier si vous comptez le nombre de caractères par ligne, n'oubliez pas le caractère de fin de ligne \n, qui correspond au retour à la ligne, celui-ci ne se trouve pas en fin de fichier, donc sur la dernière ligne... Donc dans vos algorithmes il faudra prendre en compte se fait.
 
 Voici ci-dessous les fonctions, permmettant de gérer le flux, que vous pouvez utiliser dans les scripts.
