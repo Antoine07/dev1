@@ -1,0 +1,2 @@
+# CRUD
+Nous allons terminer le CRUD à partir de notre MVC maison. Je vous rappelle que le CRUD est un acronyme qui signifie create, read update et delete. Nous allons la voir à partir de la resource posts de notre mini-blog.
