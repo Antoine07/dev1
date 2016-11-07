@@ -19,12 +19,18 @@ Notez que au-dessus de ce tableau un bouton "Ajouter un article" doit figurer.
 
 Chaque lien représenté dans le wireframe ci-dessous est materialisé par [ lien ].
 
-Détails des liens: Ajouter un article conduira à la page pour ajouter un article (CREATE), les titres des articles sont cliquables et permettrons de mettre à jour les articles en base de données (UPDAE) et enfin un lien [supprimer], par ligne dans le tableau, permettra de supprimer un article. L'action READ n'est pas demandé, elle est en fait déjà fonctionnelle sur le site (lien cliquable pour afficher un article).
+Détails des liens: 
+- Ajouter un article conduira à la page pour ajouter un article (CREATE), 
+- les titres des articles sont cliquables et permettrons de mettre à jour les articles en base de données (UPDAE) 
+- et enfin un lien [supprimer], par ligne dans le tableau, permettra de supprimer un article. 
+- L'action READ n'est pas demandée, elle est en faite déjà fonctionnelle sur le site (lien cliquable pour afficher un article).
 
 Voici la convention des liens pour le CRUD:
 
 /index.php/post/create  <-> [Ajouter un article]   CREATE
+
 /index.php/post/edit?=1  <-> [PHP7]                UPDATE
+
 /index.php/post/delete?=1  <-> [supprimer]         DELETE
 
 ```
