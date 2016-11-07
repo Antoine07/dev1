@@ -31,3 +31,8 @@ CREATE TABLE `kermits`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE kermits ADD CONSTRAINT `kermits_score_id_scores_id` FOREIGN KEY (`score_id`) REFERENCES `scores`(`id`) ON DELETE CASCADE;
+
+
+INSERT INTO `kermits` (name) VALUES ('tony'), ('alan'), ('albert'), ('Marie');
+
+SELECT COUNT(*) FROM `kermits`;

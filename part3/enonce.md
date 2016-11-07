@@ -59,3 +59,42 @@ Faites quelques insertions dans ces tables pour donner des valeurs aux grenouill
 
 ## 2/ Exercice
 Créez la classe DB, elle permettra de se connecter à la base de données.
+
+## 3/ Exercice
+Créez le modèle Kermit et implémenter les méthodes suivantes
+
+```php
+class kermit
+{
+	//todo
+	public function all()
+	{
+		
+	}
+
+	// todo
+    public function find($id)
+    {
+
+    }
+
+    // todo
+    public function create($data)
+    {
+
+    }
+
+    // todo
+    public function delte($id)
+    {
+    	
+    }
+
+    // todo
+    public function update($data, $id)
+    {
+
+    }
+
+]
+```
