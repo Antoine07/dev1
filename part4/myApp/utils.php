@@ -32,7 +32,7 @@ function get_flash_message()
 }
 
 // todo gestion des urls absolu dans les vues, écrire l'uri comme suit 'assets.images' pour assets/images plus pratique dans le code
-function url($uri=null, $params = [])
+function url($uri=null)
 {
 	if(is_null($uri))
 		return getEnv('URL_SITE');

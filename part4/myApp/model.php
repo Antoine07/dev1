@@ -20,36 +20,70 @@ function get_all_posts(){
 
 	$pdo = get_pdo();
 
-	$query = '
-		SELECT p.*, a.name as author, c.title as category_name FROM posts as p 
+	$prepare = $pdo->prepare("
+		SELECT p.*, a.name as author, c.title as category_name 
+		FROM posts as p 
 		LEFT JOIN authors as a
 		ON p.author_id = a.id
 		LEFT JOIN categories as c 
 		ON p.category_id = c.id
-	';
+		WHERE p.status='published' 
+		ORDER BY published_at
+		");
 
-	$result = $pdo->query($query);
-	$posts = $result->fetchAll(PDO::FETCH_ASSOC);
+	$prepare->execute();
+	$posts = $prepare->fetchAll(PDO::FETCH_ASSOC);
 	
 	$pdo = null;
 
 	return $posts;
 }
 
+function get_all_posts_admin(){
+
+	$pdo = get_pdo();
+
+	$prepare = $pdo->prepare("
+		SELECT p.*, a.name as author, c.title as category_name 
+		FROM posts as p 
+		LEFT JOIN authors as a
+		ON p.author_id = a.id
+		LEFT JOIN categories as c 
+		ON p.category_id = c.id
+		ORDER BY published_at DESC
+		");
+
+	$prepare->execute();
+	$posts = $prepare->fetchAll(PDO::FETCH_ASSOC);
+	
+	$pdo = null;
+
+	return $posts;
+}
+
+
 function get_find_post($id){
 
 	$pdo = get_pdo();
 
-	$result = $pdo->query(sprintf(
-		'SELECT * FROM posts 
-		 WHERE id=%s', 
-		(int) $id
-		)
-	);
-	$post = $result->fetch(PDO::FETCH_ASSOC);
+	$prepare = $pdo->prepare("
+		SELECT p.*, a.name as author, c.title as category_name, c.id as category_id 
+		FROM posts as p 
+		LEFT JOIN authors as a
+		ON p.author_id = a.id
+		LEFT JOIN categories as c 
+		ON p.category_id = c.id
+		WHERE p.id = ?
+		");
+
+	$prepare->bindValue(1,$id, PDO::PARAM_INT);
+
+	$prepare->execute();
+	$posts = $prepare->fetch(PDO::FETCH_ASSOC);
+	
 	$pdo = null;
 
-	return $post;
+	return $posts;
 }
 
 function get_all_categories()
@@ -108,4 +142,34 @@ function get_comments_by_post($id)
 	$pdo = null;
 
 	return $comments;
+}
+
+function insert_post($title, $content, $status, $category_id, $published_at)
+{
+
+	// todo
+
+	echo '<pre>';
+	print_r($title . $content. $status. $category_id. $published_at);
+	echo '</pre>';
+
+	die;
+
+}
+
+// update resource post
+function update_post($id, $title, $content, $status, $category_id, $published_at)
+{
+
+	// todo
+
+	echo '<pre>';
+	print_r($id . $title . $content. $status. $category_id. $published_at);
+	echo '</pre>';
+	die;
+}
+
+function delete_post($id)
+{
+	// todo
 }

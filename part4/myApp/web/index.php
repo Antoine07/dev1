@@ -18,9 +18,14 @@ if ( '/' === $uri) {
 	about_action();
 }elseif ('/index.php/dashboard' === $uri ) {
 	dashboard_action();
-}elseif ('/index.php/slide' === $uri ) {
-	slide_action();
 }
+elseif ('/index.php/post/create' === $uri ) {
+	create_action();
+}
+elseif ('/index.php/post/store' === $uri ) {
+	store_action();
+}
+// faites les actions edit update et delete
 else {
 	header('HTTP/1.1 404 Not Found');
 	echo '<html><body><h1>Page Not Found</h1></body></html>';

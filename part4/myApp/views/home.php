@@ -11,6 +11,7 @@
 					<br><a href="/index.php/single?id=<?php echo $post['id'] ?>">lire la suite...</a>
 				</p>
 				<p>Auteur: <?php echo $post['author']?? 'aucun auteur' ?></p>
+				<p>Date de publication: <?php echo $post['published_at']?? 'non daté' ?></p>
 				<p>Catégorie: <?php echo $post['category_name']?? 'non catégorisé' ?></p>
 				<h3>Commentaires <?php echo count(get_comments_by_post($post['id'])) ?></h3>
 				<?php foreach(get_comments_by_post($post['id']) as $comment): ?>

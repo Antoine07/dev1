@@ -103,7 +103,7 @@ function about_action()
             $_SESSION['old'] = [];
             $_SESSION['errors'] = [];
 
-            header('Location: '. url());
+            header('Location: /');
             exit;
 
         }else{
@@ -122,5 +122,113 @@ function about_action()
 
 function dashboard_action()
 {
+
+	$flash_message = get_flash_message();
+	$categories = get_all_categories();
+	$posts =  get_all_posts_admin(); // ajout d'une méthode pour afficher tous les posts sans statut 
+
+	include '../views/dashboard.php';
+}
+
+function create_action()
+{
+	$categories = get_all_categories();
+
+	session_start();
 	
+	// netoyer les variables de session si on ne vient pas de l'action store
+	if(!isset($_GET['back']))
+	{
+		$_SESSION = [];
+	}
+
+	include '../views/create.php';
+}
+
+function store_action()
+{
+	// on vérifie que l'on arrive bien sur cette action en POST
+	if($_SERVER['REQUEST_METHOD'] == 'POST')
+	{
+		session_start();
+
+	// initialisation des valeurs que l'on passera si besoin au formulaire pour réafficher les valeurs
+	// des champs si besoin
+		$_SESSION['old']['title'] = $_POST['title'];
+		$_SESSION['old']['content'] = $_POST['content'];
+		$_SESSION['old']['category'] = $_POST['category'];
+		$_SESSION['old']['status'] = $_POST['status'];
+
+		$_SESSION['errors'] = [];
+
+	// titre obligatoire
+		if(empty($_POST['title']))
+		{
+			$_SESSION['errors']['title'] = 'Le titre est obligatoire';
+		}
+
+	// contenu obligatoire
+		if(empty($_POST['content']))
+		{
+			$_SESSION['errors']['content'] = 'Le contenu est obligatoire';
+		}
+
+	// si aucune erreur on enregistre en base
+		if(empty($_SESSION['errors']))
+		{
+		// on vérifie avant de rentrer les données en base le type de nos variables
+			$status = in_array($_POST['status'], ['published', 'unpublished'])? $_POST['status'] : 'unpublished';
+
+			$category_id = ($_POST['category'] == 'null')? null :  (int) $_POST['category'] ;
+
+			$published_at = ($_POST['status'] =='published')? date('Y-m-d h:i:s') : null;
+
+		// on insert les données en base de données, méthode à mettre en place
+			insert_post(
+			$_POST['title'],  // le champ title sera protégé avec la méthode prepare
+			$_POST['content'], // le champ title sera protégé avec la méthode prepare
+			$status, 
+			$category_id,
+			$published_at
+			);
+
+		// on netoye les donnes de session
+			$_SESSION = [];
+
+			set_flash_message('L\'article a été inséré avec succès');
+			header('Location: /index.php/dashboard');
+			exit;
+
+		}else{
+
+		// si il y a des erreurs on retourne sur le formulaire create 
+			header('Location: /index.php/post/create?back=1');
+			exit;
+		}
+
+	}
+}
+
+function edit_action($id)
+{
+	$post =  get_find_post($id);
+	$categories = get_all_categories();
+
+	include '../views/edit.php' ;
+}
+
+function update_action($id)
+{
+	if($_SERVER['REQUEST_METHOD'] == 'POST')
+	{
+
+		
+	}
+
+}
+
+function delete_action($id)
+{
+	
+
 }

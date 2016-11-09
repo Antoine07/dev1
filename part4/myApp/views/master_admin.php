@@ -31,23 +31,20 @@
 </nav>
 <div class="container">
  <div class="row">
-   <div class="col-md-8">
+   <div class="col-md-12">
     <?php if(!empty($flash_message)): ?>
       <div class="alert alert-<?php echo $flash_message['type'] ?>">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong><?php echo $flash_message['type'] ?></strong> <?php echo $flash_message['message'] ?>
       </div>
     <?php endif; ?>
-    <?php echo $content?? '' ; ?></div>
-    <div class="col-md-4">
-     <h2>Les auteurs du blog</h2>
-     <?php foreach($authors as $author): ?>
-      <li><a href="/author?id=<<?php echo $author['id'] ?>"><?php echo $author['name'] ?></a></li>
-    <?php endforeach ?>
+
+    <?php echo $content?? '' ; ?> 
   </div>
 </div>
 </div>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+<!-- modal -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
 </body>
 </html>
