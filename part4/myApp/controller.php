@@ -152,14 +152,15 @@ function store_action()
 	{
 		session_start();
 
+		// on netoye avant les variables de session
+		$_SESSION = [];
+
 	// initialisation des valeurs que l'on passera si besoin au formulaire pour réafficher les valeurs
 	// des champs si besoin
 		$_SESSION['old']['title'] = $_POST['title'];
 		$_SESSION['old']['content'] = $_POST['content'];
 		$_SESSION['old']['category'] = $_POST['category'];
 		$_SESSION['old']['status'] = $_POST['status'];
-
-		$_SESSION['errors'] = [];
 
 	// titre obligatoire
 		if(empty($_POST['title']))
@@ -219,6 +220,7 @@ function edit_action($id)
 
 function update_action($id)
 {
+	// vérifier bien que vous arrivé ici en méthode POST
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 
