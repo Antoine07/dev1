@@ -1,5 +1,7 @@
 # Commandes d'aide
 
+documentation [https://git-scm.com/docs]
+
 ## logs 
 - git status avoir le statut de votre dépôt quel état
 - git help [command]
@@ -10,6 +12,8 @@
 - git log -p -5 
 - git log --stat
 - git log --since=2.weeks
+
+Pour quitter les logs de git tapez la lettre q dans la console, q pour quitter.
 
 ## Checkout
 
@@ -60,3 +64,105 @@ $ git commit --amend # associe les changements au dernier commit, le message du 
 $ git commit --amend
 
 ```
+## Reset annulation
+La commande reset modifie l'historique, il ne faut jamais le faire sur des commits déjà publiés!
+
+``` bash
+# Annule le dernier commit et met tout dans le WD sans perte
+$ git reset HEAD~ 
+
+# Annule le dernier commit et met tout dans la staging area sans perte
+$ git reset --soft HEAD~
+
+# Annule le dernier commit et supprime les modifications...(danger)
+$ git reset --hard HEAD~
+
+# Retire un fichier de la staging area, sans perte de modif
+$ git add [fileName]
+$ git reset HEAD [fileName]
+
+# On peut faire un git reset sur un commit, en utilisant les options précédentes, attention tous les commits suivants le commit annulé seront perdus:
+$ git reste  f597d47552d 
+
+$ git reset HEAD 
+...
+
+```
+
+Git fait un fast-foward sur la branche master et dev, par exemple quand tous les commits de la branche master sont atteignables depuis la branche dev,
+sinon Git fait un commit de merge
+
+``` bash
+
+$ git checkout master
+$ git merge dev
+
+# Forcer un commit de merge sur un fast-foward
+
+$ git merge dev --no-ff
+
+# Supprimer une branche 
+
+$ git branch -d dev
+
+# Voir toutes les branches non mergés
+
+$ git branch --no-merged
+
+# Forcer la suppression d'une branche, non mergé donc, en perdant le travail dessus:
+
+$ git branch -D ma_branche
+
+```
+
+## Gestion de conflit
+
+Pour fusionner deux branches Git repère le dernier commit commun entre les deux branches et utilise les modifs des deux branches.
+
+Il analyse trois versions différentes du dépôt:
+
+- version dernier commit
+- version de la première branche à fusionner actuelle
+- version de la deuxième branche à fusionner actuelle
+
+Il faut résoudre chaque conflit, lorsque deux versions du même fichier ont été modifié aux mêmes endroits.
+
+``` bash
+tagtagtag HEAD 
+	Music Pi 
+tagtagtag
+	SONIC 
+tagtagtag branchB  
+
+$ git add . 
+$ git commit # message de merge par défaut
+
+```
+On peut avoir plusieurs conflits à gérer dans plusieurs fichiers...
+
+## Stash (remisé)
+
+Si des fichiers suivis par Git, modifiés mais non commité, sur une branche particulière existent, alors on ne peut pas changer de branche. Cependant, on peut remiser son code sur la branche particulière pour y revenir plus tard.
+
+ ``` bash
+
+ $ git branch
+ master
+ dev
+ * feature_route
+ $ git stach
+ $ git checkout master
+ # correction d'un bug...
+ $ git checkout feature_route
+ # liste les stash
+ $ git stash list
+ stash@{0}: WIP on master: 01524a bug important 
+ stash@{1}: WIP on master: 452ets un test non validé
+ # remet le code remisé dans le WD on peut ajouter --index pour le re-stagé si il l'était
+ $ git stash apply
+ # ou appliquer un stash particulier
+ $ git stash apply stash@{1}
+ # supprime le stash
+ $ git stash drop 
+
+ ```
