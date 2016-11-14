@@ -1,0 +1,9 @@
+{
+	"autoload": {
+		"files": [ "models/post_model.php", "controllers/front_controllers.php", "controllers/post_controllers.php", "utils.php"]
+	},
+	"require": {
+		"vlucas/phpdotenv": "^2.4",
+		"swiftmailer/swiftmailer": "^5.4"
+	}
+}
