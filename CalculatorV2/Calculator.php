@@ -7,7 +7,6 @@
  */
 class Calculator {
 
-    private $memory = false;
     private $precision = null;
 
     /**
@@ -34,7 +33,7 @@ class Calculator {
 
     public function mul(float $a, float $b) {
 
-        if ($this->memory) {
+        if ($this->isMemory()) {
             $this->setResult(($a * $b));
 
             return $this->result();
@@ -48,7 +47,7 @@ class Calculator {
 
         $res = $a - $b;
 
-        if ($this->memory) {
+        if ($this->isMemory()) {
             $this->setResult($res);
 
             return $this->result();
@@ -61,7 +60,7 @@ class Calculator {
 
         $res = $a + $b;
 
-        if ($this->memory) {
+        if ($this->isMemory()) {
             $this->setResult($res);
 
             return $this->result();
@@ -90,8 +89,6 @@ class Calculator {
     public function setMemory(bool $m) {
 
         $_SESSION['memory'] = $m;
-
-        $this->memory = $m;
 
     }
 
