@@ -1,13 +1,12 @@
 # Projet Panier
 
-Vous développez un projet de panier et affichez dans une page principale la liste des produits.
+Vous développez un projet de panier et affichez dans une page principale la liste des produits commandés.
 
-- listes des classes utiles pour le projet
+- listes des classes PHP utiles pour le projet
 
     - Une classe Product permettant de déterminer le nom et le prix des produits. 
     - Une classe Bike qui hérite de la classe Product.
-    - Une classe StorageBike qui permettra de récupérer les produits stockés dans un fichier et d'hydrater à partir de ces données
-    les objets de type Bike dans le projet.
+    - Une classe StorageBike qui permettra de récupérer les produits stockés dans un fichier.
 
 Voici le diagramme UML de la classe Product, le type sera fixé par défaut dans la classe Product et surchargé dans la classe
 Bike.
@@ -62,7 +61,7 @@ StorageBike
 **************
 
 __construct($fileName = 'bikes.csv')
-load
++ load
 
 **************
 
