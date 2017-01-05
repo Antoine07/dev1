@@ -31,6 +31,10 @@ class StorageBike {
          * celle-ci retournera false, condition d'arrêt
          * de notre boucle ici.
          *
+         * remarques: la condition ci-dessous doit être dans des paranthèses sinon $data prendra une valeur boolean, écrivez
+         * ( $data[] = fgetcsv($handle, 1024, ",") ) dans ce cas l'affectation se fera pour la valeur $data et sera ensuite
+         * testé avec la valeur false
+         *
          */
         while ( ($data[] = fgetcsv($handle, 1024, ",")) !== false ) ;
 
