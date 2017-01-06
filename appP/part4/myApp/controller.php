@@ -147,6 +147,9 @@ function create_action()
 
 function store_action()
 {
+
+	
+
 	// on vérifie que l'on arrive bien sur cette action en POST
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{

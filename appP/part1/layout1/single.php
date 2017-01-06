@@ -5,7 +5,7 @@ if(isset($_GET['id']))
 	$link = new PDO("mysql:host=localhost;dbname=db_blog", 'root', '');
 	$result = $link->query(sprintf('SELECT id, title, content FROM posts WHERE id=%s', (int) $_GET['id'] ));
 
-	$post = $result->fetch(PDO::FETCH_ASSOC);
+	$post = $result->fetch(PDO::FETCH_ASSOC); // une seule ligne de la table 
 	
 	$link = null; // fermer la connexion
 }

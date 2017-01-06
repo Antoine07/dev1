@@ -75,9 +75,13 @@ Formulaire
 form action="/index.php/store" method="post"
 les champs notés (*) sont obligatoires
 title [text] (*)
+
 content [textarea] (*)
+
 categorie [select]
+
 publier [radio]
+
 statut [radio]
 
 [ok]
@@ -85,15 +89,14 @@ statut [radio]
 
 ```
 # Exercice (udpate)
-Gérez maintenant l'update, vous avez une url pour afficher le contenu de votre article, je vous la rappelle: /index.php/post/edit?id=1 et une autre pour effectivement faire la mise à jour de ce contenu et qui sera dans l'action du formulaire /index.php/post/update?id=1
+Ne gérez pas les erreurs dans le formulaire pour l'instant, faites uniquement la mise à jour en base de données.
+
+Vous avez une url pour afficher le contenu de votre article, je vous la rappelle: /index.php/post/edit?id=1, faite une vue edit.php et une autre pour effectivement faire la mise à jour de ce contenu et qui sera dans l'action du formulaire /index.php/post/update?id=1
 
 # Exercice (delete)
-Terminez par la suppression de l'article, créez un message d'alerte en javascript pour confirmer avant la suppression.
+Terminez par la suppression de l'article, créez un message type popup avec le bootstrap pour avertir l'utilisateur avant la suppression.
 
 - url: /index.php/post/delete?id=1 créez l'action delete_action() dans vos contrôleurs.
 
 # Exercice (pagination)
-Faites de la pagination pour l'affichage des articles sur la page "dashboard". Vous afficherez 10 articles par page.
-
-# Exercice (ajout d'image)
-Ajoutez maintenant un champ file dans les deux formulaires respectivement de création d'un article et de mise à jour. Gérez maintenant l'upload d'un fichier.
+Modifiez maintenant la méthode get_all_posts pour afficher les articles avec de la pagination, affichez 10 articles par page.

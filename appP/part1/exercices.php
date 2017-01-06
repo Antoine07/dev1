@@ -362,3 +362,24 @@ echo '</pre>';
 echo '<pre>';
 print_r(vigen_decode("DIU UIO K JMJGG UI YKMPW HG C EEQS GD ZQEX WOZCFMT JYIOVQ XSTKW", "SECRETKEY"));
 echo '</pre>';
+
+// Exercice 16 impact dans un cercle
+function is_in_circle(array $circle, array $proj)
+{
+	$r = $circle['r'];
+
+	// calculer de $d distance par rapport au centre du cercle du point $proj
+	$d = pow(($circle['x'] - $proj['x']), 2) + pow(($circle['y'] - $proj['y']), 2);
+
+	// si cette distance est inférieur au rayon du cercle c'est que le proj est dans le cercle.
+	if($d < pow($r,2) ) return true;
+
+	return false;
+}
+
+$circle = ['r' => 9, 'x' => 10, 'y' => 20];
+$proj = ['x' => 5, 'y' => 13];
+
+echo '<pre>';
+print_r(is_in_circle($circle, $proj)? 'yes impact' : 'no impact');
+echo '</pre>';
