@@ -1,5 +1,6 @@
-#  Projet Calculatrice
+#  Projet Calculatrice en deux parties
 
+## Partie 1 à faire maintenant
 Vous implémentez une classe Calculator, permettant d'effectuer des opérations classiques de calcul.
 Suivez le schéma ci-dessous (diagramme UML) pour écrire le code utile de la classe, précisons que dans un diagramme UML
 les symboles suivants désignent la portée des membres d'une classe:
@@ -25,7 +26,11 @@ Calculator
 
 ```
 
-## Organisation et présentation des résultat
+## Partie 2
+
+On aimerait maintenant mettre en place une page HTML/CSS pour que des utilisateurs Web utilisent notre calculatrice.
+
+### Organisation et présentation des résultat
 
 Faites un dossier CalculatorV1 et dans celui-ci créez un fichier Calculator.php pour la classe, un fichier index.php
 qui traitera les données, c'est dans ce fichier que vous importerez la classe Calculator.php et que vous traiterez le formulaire
