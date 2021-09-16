@@ -3,10 +3,12 @@
 Vous implémentez une classe Calculator, permettant d'effectuer des opérations classiques de calcul.
 Suivez le schéma ci-dessous (diagramme UML) pour écrire le code utile de la classe, précisons que dans un diagramme UML
 les symboles suivants désignent la portée des membres d'une classe:
+
+```text
 + public
 - private
-
 ```
+```text
 **************
 Calculator
 **************
